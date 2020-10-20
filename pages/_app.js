@@ -1,7 +1,5 @@
-import '../styles/globals.css'
+import '../styles/globals.css';
+import '../pages/login/login.css';
+import App from './index';
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
-}
-
-export default MyApp
+export default App;
