@@ -53,23 +53,4 @@
     height: 20vh;
     width: 20vw;
   }
-
-  .inputContainer {
-    display: flex;
-    flex-direction: column;
-    width: 70%;
-    align-items: center;
-  }
-
-  .input {
-    padding: 10px;
-    margin: 0 0 15px 0;
-    width: 100%;
-    border-width: 1px;
-    border-color: rgba(0, 0, 0, 0.2);
-  }
-
-  .btnContainer {
-    width: 100%;
-  }
 }
