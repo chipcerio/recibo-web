@@ -9,6 +9,29 @@
 .loginContent {
   height: 80vh;
   width: 80vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnContainer {
+  width: 100%;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+}
+
+.input {
+  padding: 10px 0 10px 0;
+  margin: 0 0 15px 0;
+  border-width: 1px;
+  border-color: rgba(0, 0, 0, 0.2);
+  width: 100%;
 }
 
 .img {
@@ -16,16 +39,7 @@
   width: 30vw;
 }
 
-.input {
-  padding: 10px;
-  border-radius: 50px;
-  border-width: 1px;
-  margin: 15px 0 0 0;
-  width: 70vw;
-  border-color: rgba(0, 0, 0, 0.2);
-}
-
-@media (max-width: 721px) {
+@media (max-width: 720px) {
   .loginContent {
     display: flex;
     justify-content: center;
@@ -35,12 +49,27 @@
     width: 70vw;
   }
 
+  .img {
+    height: 20vh;
+    width: 20vw;
+  }
+
+  .inputContainer {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    align-items: center;
+  }
+
   .input {
     padding: 10px;
-    border-radius: 50px;
+    margin: 0 0 15px 0;
+    width: 100%;
     border-width: 1px;
-    margin: 15px 0 0 0;
-    width: 50vw;
     border-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .btnContainer {
+    width: 100%;
   }
 }

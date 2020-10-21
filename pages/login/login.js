@@ -1,5 +1,6 @@
-import styles from './login.module.css';
-import React, { useState } from 'react';
+import style from './login.module.css';
+import Button from '../../src/components/button/button';
+import { useState } from 'react';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
@@ -18,22 +19,25 @@ export default function LoginPage() {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={`${styles.loginContent} card`}>
-        <img src='./assets/undraw_receipt.svg' className={styles.img} />
-        <input
-          className={styles.input}
-          placeholder='Username'
-          onChange={onChangeUsername}
-        />
-        <input
-          className={styles.input}
-          placeholder='Password'
-          onChange={onChangePassword}
-          type='password'
-        />
-        <button onClick={handleSubmit}>Login</button>
-        <div>Forgot Password?</div>
+    <div className={style.container}>
+      <div className={`${style.loginContent} card`}>
+        <img src='./assets/undraw_receipt.svg' className={style.img} />
+        <div className={style.inputContainer}>
+          <input
+            placeholder='Username'
+            className={style.input}
+            onChange={onChangeUsername}
+          />
+          <input
+            placeholder='Password'
+            className={style.input}
+            onChange={onChangePassword}
+          />
+          <div className={style.btnContainer}>
+            <Button label='Login' onClick={handleSubmit} />
+          </div>
+          <div className={style.fogotPassword}>Forgot Password?</div>
+        </div>
       </div>
     </div>
   );

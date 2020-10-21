@@ -1,0 +1,12 @@
+.container {
+  background-color: lightblue;
+  padding: 1vw;
+  text-align: center;
+}
+
+.container:hover {
+  cursor: pointer;
+  background-color: blue;
+  color: white;
+  transition: ease background-color 250ms;
+}
