@@ -1,4 +1,3 @@
-import style from './login.module.css';
 import Button from '../../src/components/button/button';
 import { useState } from 'react';
 
@@ -19,24 +18,26 @@ export default function LoginPage() {
   };
 
   return (
-    <div className={style.container}>
-      <div className={`${style.loginContent} card`}>
-        <img src='./assets/undraw_receipt.svg' className={style.img} />
-        <div className={style.inputContainer}>
+    <div className='container'>
+      <div className='loginContent card'>
+        <img src='./assets/undraw_receipt.svg' className='img' />
+
+        <div className='inputContainer'>
           <input
             placeholder='Username'
-            className={style.input}
+            className='input'
             onChange={onChangeUsername}
           />
           <input
             placeholder='Password'
-            className={style.input}
+            className='input'
             onChange={onChangePassword}
           />
-          <div className={style.btnContainer}>
+          <div className='loginBtn'>
             <Button label='Login' onClick={handleSubmit} />
           </div>
-          <div className={style.fogotPassword}>Forgot Password?</div>
+
+          <div>Forgot Password?</div>
         </div>
       </div>
     </div>
