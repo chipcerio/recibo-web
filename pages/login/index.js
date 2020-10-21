@@ -1,5 +1,6 @@
 import Button from '../../components/button/button';
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
@@ -37,7 +38,13 @@ export default function LoginPage() {
             <Button label='Login' onClick={handleSubmit} />
           </div>
 
-          <div>Forgot Password?</div>
+          <div className='loginBtn'>
+            <Button label='Facebook' onClick={handleSubmit} />
+          </div>
+
+          <Link href='./home'>
+            <div className='forgotPassword'>Forgot Password?</div>
+          </Link>
         </div>
       </div>
     </div>
