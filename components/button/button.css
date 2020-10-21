@@ -5,7 +5,7 @@
 
 .btnContainer:hover {
   cursor: pointer;
-  background-color: blue;
+  background-color: red;
   color: white;
   transition: ease background-color 250ms;
 }

@@ -1,8 +1,13 @@
 import '../styles/globals.css';
-import '../src/components/button/button.css';
-import App from './index';
+
+/* Styles */
+import '../components/button/button.css';
 
 /* Pages */
-import '../pages/login/login.css';
+import '../styles/pages/login/login.css';
 
-export default App;
+function MyApp({ Component, pageProps }) {
+  return <Component {...pageProps} />;
+}
+
+export default MyApp;
