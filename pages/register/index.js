@@ -29,6 +29,7 @@ export default function RegisterPage() {
   const [AuthPage, setAuthPage] = useState(false);
   const values = watch();
   const router = useRouter();
+  const [error_message, setErrorMessage] = useState('');
 
   useEffect(() => {
     register(
@@ -87,6 +88,7 @@ export default function RegisterPage() {
   const onSubmit = async (val) => {
     const { email, password } = val;
     try {
+      setErrorMessage('');
       const signUpResponse = await Auth.signUp({
         username: email,
         password,
@@ -95,6 +97,7 @@ export default function RegisterPage() {
       setAuthPage(true);
       console.log('DATA >>> ', val);
     } catch (error) {
+      setErrorMessage(error.message);
       console.log('ERROR >>> ', error);
     }
   };
@@ -154,6 +157,9 @@ export default function RegisterPage() {
               disable={!_validated}
             />
           </div>
+          {error_message === '' ? null : (
+            <div className='fontWarning'>{error_message}</div>
+          )}
         </div>
       </div>
       <VerificationComponent email={values.email} />
