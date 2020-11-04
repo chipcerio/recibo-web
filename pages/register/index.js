@@ -93,7 +93,7 @@ export default function RegisterPage() {
         username: email,
         password,
       });
-      console.log('signUpResponse', signUpResponse);
+      console.log('signUpResponse >>> ', signUpResponse);
       setAuthPage(true);
       console.log('DATA >>> ', val);
     } catch (error) {
