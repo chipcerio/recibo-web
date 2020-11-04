@@ -20,6 +20,7 @@ export default function RegisterPage() {
     setValue,
     trigger,
   } = useForm({
+    username: '',
     email: '',
     password: '',
     confirm_password: '',
@@ -83,12 +84,19 @@ export default function RegisterPage() {
     setValidated(formValidated());
   };
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (val) => {
+    const { email, password } = val;
     try {
+      const signUpResponse = await Auth.signUp({
+        username: email,
+        password,
+      });
+      console.log('signUpResponse', signUpResponse);
       setAuthPage(true);
-      console.log('DATA >>> ', data);
-      console.log('Registered', _validated);
-    } catch (error) {}
+      console.log('DATA >>> ', val);
+    } catch (error) {
+      console.log('ERROR >>> ', error);
+    }
   };
   return (
     <div className='container'>
@@ -103,7 +111,9 @@ export default function RegisterPage() {
               onChange={(event) => inputEmail(event.target.value)}
               value={values.email}
             />
-            {errors.email && <div>Email is required</div>}
+            {errors.email && (
+              <div className='fontWarning'>Email is required</div>
+            )}
           </div>
           <div>
             <input
@@ -116,6 +126,9 @@ export default function RegisterPage() {
               }}
               value={values.password}
             />
+            {errors.password && (
+              <div className='fontWarning'>Password is required</div>
+            )}
           </div>
 
           <div>
@@ -129,6 +142,9 @@ export default function RegisterPage() {
               }}
               value={values.confirm_password}
             />
+            {errors.confirm_password && (
+              <div className='fontWarning'>Confirm Password is required</div>
+            )}
           </div>
 
           <div className='loginBtn'>
