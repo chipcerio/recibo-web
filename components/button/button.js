@@ -1,7 +1,7 @@
-function Button({ type, onClick, label }) {
+function Button({ type, onClick, label, disable }) {
   return (
     <div
-      className='btnContainer primary fontLight'
+      className={`primary fontLight ${disable ? 'btnDisable' : 'btnContainer'}`}
       onClick={onClick}
       type={type}
     >

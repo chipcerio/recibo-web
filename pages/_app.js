@@ -4,7 +4,8 @@ import '../styles/globals.css';
 import '../components/button/button.css';
 
 /* Pages */
-import '../pages/login/login.css';
+import './login/login.css';
+import './register/register.css';
 
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />;

@@ -3,6 +3,16 @@
   text-align: center;
 }
 
+.btnDisable {
+  padding: 10px;
+  cursor: not-allowed;
+  pointer-events: none;
+  text-align: center;
+  background-color: white;
+  color: #e6e6e6;
+  box-shadow: inset 0px 0px 14px -3px #e0e0e0;
+}
+
 .btnContainer:hover {
   cursor: pointer;
   background-color: red;

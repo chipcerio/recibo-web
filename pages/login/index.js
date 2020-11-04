@@ -1,21 +1,27 @@
 import Button from '../../components/button/button';
-import { useState } from 'react';
 import Link from 'next/link';
+import { Auth } from 'aws-amplify';
+
+import { useForm } from 'react-hook-form';
 
 export default function LoginPage() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [valid, setValid] = useState('');
-  const handleSubmit = (e) => {
-    setValid([username, password]);
-  };
+  const { register, handleSubmit } = useForm({
+    email: '',
+    password: '',
+  });
 
-  const onChangeUsername = (e) => {
-    setUsername(e.target.value);
-  };
-
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
+  const onSubmit = async (data) => {
+    console.log('DATA>>> ', data);
+    try {
+      const response = await Auth.signIn({
+        username: data.email,
+        password: data.password,
+      });
+      console.log('Login Response >> ', response);
+      console.log('USERNAME> ', response.username);
+    } catch (error) {
+      console.log('##############################', error);
+    }
   };
 
   return (
@@ -25,22 +31,27 @@ export default function LoginPage() {
 
         <div className='inputContainer'>
           <input
-            placeholder='Username'
+            name='email'
+            placeholder='Email'
             className='input'
-            onChange={onChangeUsername}
+            ref={register}
           />
           <input
+            name='password'
             placeholder='Password'
             className='input'
-            onChange={onChangePassword}
+            ref={register}
           />
           <div className='loginBtn'>
-            <Button label='Login' onClick={handleSubmit} />
+            <Button
+              label='Login'
+              onClick={handleSubmit(onSubmit)}
+              disable={false}
+            />
           </div>
-
-          <div className='loginBtn'>
-            <Button label='Facebook' onClick={handleSubmit} />
-          </div>
+          <Link href='./register'>
+            <div className='register'>Register</div>
+          </Link>
 
           <Link href='./home'>
             <div className='forgotPassword'>Forgot Password?</div>
