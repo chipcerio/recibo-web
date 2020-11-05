@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Button from '../button/button';
 import { Auth } from 'aws-amplify';
 import { useForm } from 'react-hook-form';
@@ -15,10 +15,6 @@ export default function AuthPage(props) {
   const handleConfirm = async () => {
     try {
       console.log('handle confirm ', email, code);
-      // const confirmResponse = await Auth.confirmSignUp({
-      //   username: email,
-      //   code,
-      // });
       const authResponse = await Auth.confirmSignUp(email, code);
       console.log('Confirmation Code Res >>> ', authResponse);
     } catch (error) {

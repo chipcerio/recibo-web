@@ -1,6 +1,7 @@
 .btnContainer {
   padding: 10px;
   text-align: center;
+  border-radius: 3px;
 }
 
 .btnDisable {

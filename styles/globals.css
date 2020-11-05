@@ -12,7 +12,11 @@ body {
 }
 
 .primary {
-  background-color: #06d6a0;
+  background-color: #5fc0f1;
+}
+
+.fontPrimary {
+  color: #04192e;
 }
 
 .fontLight {
