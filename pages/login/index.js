@@ -1,63 +1,167 @@
-import Button from '../../components/button/button';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Auth } from 'aws-amplify';
-
 import { useForm } from 'react-hook-form';
+import Card from '@material-ui/core/Card';
+import { makeStyles } from '@material-ui/core/styles';
+import ButtonComponent from '../../components/button/button';
+import InputComponent from '../../components/input/input';
+import { EMAIL, PASSWORD } from '../../constants/field.constants';
 
 export default function LoginPage() {
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit, setValue, trigger, watch } = useForm({
     email: '',
     password: '',
   });
+  const values = watch();
+  const classes = styles();
+  const [loading, setLoading] = useState(false);
+  const [disable, setDisable] = useState(false);
+
+  useEffect(() => {
+    register({ name: EMAIL }, { required: true });
+    register({ name: PASSWORD }, { required: true });
+  }, []);
+
+  const inputEmail = async (val) => {
+    setValue(EMAIL, val, true);
+    await trigger([EMAIL]);
+  };
+
+  const inputPassword = async (val) => {
+    setValue(PASSWORD, val, true);
+    await trigger([PASSWORD]);
+  };
 
   const onSubmit = async (data) => {
-    console.log('DATA>>> ', data);
+    console.log('DATA >>> ', data);
     try {
-      const response = await Auth.signIn({
+      setLoading(true);
+      setDisable(true);
+      const signInResponse = await Auth.signIn({
         username: data.email,
         password: data.password,
       });
-      console.log('Login Response >> ', response);
-      console.log('USERNAME> ', response.username);
+      console.log('SignIn Response >>> ', signInResponse);
     } catch (error) {
-      console.log('##############################', error);
+      setLoading(false);
+      setDisable(false);
+      console.log('ERROR >>> ', error);
     }
   };
 
   return (
-    <div className='container'>
-      <div className='loginContent card'>
-        <img src='./assets/undraw_receipt.svg' className='img' />
-
-        <div className='inputContainer'>
-          <input
-            name='email'
-            placeholder='Email'
-            className='input'
-            ref={register}
-          />
-          <input
-            name='password'
-            placeholder='Password'
-            className='input'
-            ref={register}
-          />
-          <div className='loginBtn'>
-            <Button
-              label='Login'
-              onClick={handleSubmit(onSubmit)}
-              disable={false}
-            />
-          </div>
-          <Link href='./register'>
-            <div className='register'>Register</div>
-          </Link>
-
-          <Link href='./home'>
-            <div className='forgotPassword'>Forgot Password?</div>
+    <div className={classes.container}>
+      <Card className={classes.loginContent}>
+        <div className={classes.signUp}>
+          <Link href='/register'>
+            <a className={`${classes.hyperLink} fontPrimary letterSpacing`}>
+              Sign Up
+            </a>
           </Link>
         </div>
-      </div>
+        <img src='./assets/undraw_receipt.svg' className={classes.img} />
+        <div className={classes.inputContainer}>
+          <div className={classes.input}>
+            <InputComponent
+              name='email'
+              placeholder='Email'
+              ref={register}
+              value={values.email}
+              variant='outlined'
+              onChange={(event) => inputEmail(event.target.value)}
+            />
+          </div>
+          <div className={classes.input}>
+            <InputComponent
+              name='confirm_password'
+              ref={register}
+              value={values.password}
+              placeholder='Password'
+              variant='outlined'
+              type='password'
+              onChange={(event) => inputPassword(event.target.value)}
+            />
+          </div>
+          <div className={classes.login}>
+            <ButtonComponent
+              label='Login'
+              loading={loading}
+              onClick={handleSubmit(onSubmit)}
+              disable={disable}
+              variant={disable ? 'contained' : 'outlined'}
+              loadingSize={30}
+              loadingColor='inherit'
+            />
+          </div>
+
+          <div>
+            <Link href='/'>
+              <a className={`${classes.hyperLink} fontPrimary letterSpacing`}>
+                Forgot Password?
+              </a>
+            </Link>
+          </div>
+        </div>
+      </Card>
     </div>
   );
 }
+
+const styles = makeStyles({
+  container: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100vh',
+  },
+  inputContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+    width: '70%',
+    margin: '0 4vw 0 0',
+  },
+  loginContent: {
+    position: 'relative',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    height: '70%',
+    width: '50%',
+    ['@media (max-width:700px)']: {
+      position: 'relative',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexDirection: 'column',
+      height: '70%',
+      width: '70%',
+    },
+  },
+  signUp: {
+    position: 'absolute',
+    right: '20px',
+    top: '10px',
+
+    ['@media (max-width:700px)']: {},
+  },
+  img: {
+    height: '50vh',
+    width: '50vw',
+    ['@media (max-width:700px)']: {
+      height: '30vh',
+      width: '30vw',
+    },
+  },
+  input: {
+    margin: '0 0 20px 0',
+    width: '100%',
+  },
+  login: {
+    width: '100%',
+    margin: '0 0 10px 0',
+  },
+  hyperLink: { textDecoration: 'none', fontWeight: '500' },
+});

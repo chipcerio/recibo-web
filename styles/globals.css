@@ -15,8 +15,12 @@ body {
   background-color: #5fc0f1;
 }
 
+.letterSpacing {
+  letter-spacing: 0.1em;
+}
+
 .fontPrimary {
-  color: #04192e;
+  color: #758799;
 }
 
 .fontLight {

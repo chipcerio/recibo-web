@@ -4,15 +4,20 @@
   align-items: center;
   width: 100vw;
   height: 100vh;
+  background-color: lightblue;
+}
+
+.signUp {
+  background-color: red;
 }
 
 .loginContent {
   height: 80vh;
   width: 600px;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center; */
 }
 
 .inputContainer {
@@ -23,11 +28,12 @@
 }
 
 .input {
-  padding: 10px 0 10px 0;
+  padding: 10px;
   margin: 0 0 15px 0;
-  border-width: 1px;
+  border-width: 0px;
+  border-radius: 50px;
   border-color: rgba(0, 0, 0, 0.2);
-  width: 100%;
+  /* width: 100%; */
 }
 
 .loginBtn {
@@ -51,10 +57,10 @@
 
 @media (max-width: 720px) {
   .loginContent {
-    display: flex;
+    /* display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: column; */
     height: 70vh;
     width: 70vw;
   }
