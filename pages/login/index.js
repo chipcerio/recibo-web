@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ButtonComponent from '../../components/button/button';
 import InputComponent from '../../components/input/input';
 import { EMAIL, PASSWORD } from '../../constants/field.constants';
+import SnackbarComponent from '../../components/snackbar/snackbar';
 
 export default function LoginPage() {
   const { register, handleSubmit, setValue, trigger, watch } = useForm({
@@ -17,6 +18,7 @@ export default function LoginPage() {
   const classes = styles();
   const [loading, setLoading] = useState(false);
   const [disable, setDisable] = useState(false);
+  const [snackShow, setSnackShow] = useState(false);
 
   useEffect(() => {
     register({ name: EMAIL }, { required: true });
@@ -38,6 +40,7 @@ export default function LoginPage() {
     try {
       setLoading(true);
       setDisable(true);
+      setSnackShow(false);
       const signInResponse = await Auth.signIn({
         username: data.email,
         password: data.password,
@@ -46,6 +49,7 @@ export default function LoginPage() {
     } catch (error) {
       setLoading(false);
       setDisable(false);
+      setSnackShow(true);
       console.log('ERROR >>> ', error);
     }
   };
@@ -102,6 +106,9 @@ export default function LoginPage() {
               </a>
             </Link>
           </div>
+          {snackShow ? (
+            <SnackbarComponent show={snackShow} duration={3000} />
+          ) : null}
         </div>
       </Card>
     </div>
