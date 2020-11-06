@@ -18,7 +18,13 @@ export default function ForgotPasswordPage() {
   const [disable, setDisable] = useState(false);
 
   useEffect(() => {
-    register({ name: EMAIL }, { required: true });
+    register(
+      { name: EMAIL },
+      {
+        required: true,
+        pattern: /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$/,
+      }
+    );
   }, []);
 
   const inputEmail = async (val) => {

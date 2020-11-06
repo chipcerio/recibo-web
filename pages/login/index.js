@@ -21,7 +21,13 @@ export default function LoginPage() {
   const [snackShow, setSnackShow] = useState(false);
 
   useEffect(() => {
-    register({ name: EMAIL }, { required: true });
+    register(
+      { name: EMAIL },
+      {
+        required: true,
+        pattern: /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$/,
+      }
+    );
     register({ name: PASSWORD }, { required: true });
   }, []);
 
