@@ -2,27 +2,42 @@ import { useState, useEffect } from 'react';
 import Card from '@material-ui/core/Card';
 import { Auth } from 'aws-amplify';
 import { makeStyles } from '@material-ui/core/styles';
+import { useForm } from 'react-hook-form';
 // Components
 import ButtonComponent from '../../components/button/button';
 import InputComponent from '../../components/input/input';
+import { EMAIL } from '../../constants/field.constants';
 
 export default function ForgotPasswordPage() {
+  const { register, handleSubmit, setValue, trigger, watch, errors } = useForm({
+    email: '',
+  });
   const classes = styles();
+  const values = watch();
   const [loading, setLoading] = useState(false);
   const [disable, setDisable] = useState(false);
-  const [email, setEmail] = useState('');
 
-  const inputEmail = (e) => {
-    setEmail(e);
+  useEffect(() => {
+    register({ name: EMAIL }, { required: true });
+  }, []);
+
+  const inputEmail = async (val) => {
+    setValue(EMAIL, val, true);
+    await trigger({ EMAIL });
+    console.log(val);
   };
 
-  const onSubmit = async () => {
+  const onSubmit = async (data) => {
+    console.log('Button Pressed >>> ', data);
     try {
       setLoading(true);
       setDisable(true);
-      const forgotPassResponse = await Auth.forgotPassword(email);
-      console.log('Forgot Password Response >>> ', forgotPassResponse);
+      const forgotPasswordResponse = await Auth.forgotPassword(data.email);
+
+      console.log('FORGOT PASSWORD RESPONSE >>> ', forgotPasswordResponse);
     } catch (error) {
+      setLoading(false);
+      setDisable(false);
       console.log('ERROR >>> ', error);
     }
   };
@@ -31,21 +46,25 @@ export default function ForgotPasswordPage() {
       <Card className={classes.content}>
         <div className={classes.input}>
           <InputComponent
+            ref={register}
+            value={values.email}
             placeholder='Email'
             variant='outlined'
             onChange={(event) => {
               inputEmail(event.target.value);
             }}
           />
+          {errors.email && <a className='fontDanger'>Email is required</a>}
         </div>
         <div className={classes.button}>
           <ButtonComponent
             label='Send Code'
-            onClick={onSubmit}
+            onClick={handleSubmit(onSubmit)}
             loading={loading}
             disable={disable}
             variant={disable ? 'contained' : 'outlined'}
             loadingColor='inherit'
+            loadingSize={30}
           />
         </div>
       </Card>

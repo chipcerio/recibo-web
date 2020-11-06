@@ -10,7 +10,7 @@ import { EMAIL, PASSWORD } from '../../constants/field.constants';
 import SnackbarComponent from '../../components/snackbar/snackbar';
 
 export default function LoginPage() {
-  const { register, handleSubmit, setValue, trigger, watch } = useForm({
+  const { register, handleSubmit, setValue, trigger, watch, error } = useForm({
     email: '',
     password: '',
   });
