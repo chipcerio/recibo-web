@@ -100,7 +100,7 @@ export default function LoginPage() {
           </div>
 
           <div>
-            <Link href='/'>
+            <Link href='/forgotpassword'>
               <a className={`${classes.hyperLink} fontPrimary letterSpacing`}>
                 Forgot Password?
               </a>

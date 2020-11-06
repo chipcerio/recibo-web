@@ -6,7 +6,6 @@ import config from 'config/aws.config';
 import '../components/button/button.css';
 
 /* Pages */
-import './login/login.css';
 import './register/register.css';
 
 Amplify.configure({
