@@ -8,9 +8,10 @@ import ButtonComponent from '../../components/button/button';
 import InputComponent from '../../components/input/input';
 import { EMAIL, PASSWORD } from '../../constants/field.constants';
 import SnackbarComponent from '../../components/snackbar/snackbar';
+import TextField from '@material-ui/core/TextField';
 
 export default function LoginPage() {
-  const { register, handleSubmit, setValue, trigger, watch } = useForm({
+  const { register, handleSubmit, setValue, trigger, watch, error } = useForm({
     email: '',
     password: '',
   });
@@ -21,7 +22,13 @@ export default function LoginPage() {
   const [snackShow, setSnackShow] = useState(false);
 
   useEffect(() => {
-    register({ name: EMAIL }, { required: true });
+    register(
+      { name: EMAIL },
+      {
+        required: true,
+        pattern: /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$/,
+      }
+    );
     register({ name: PASSWORD }, { required: true });
   }, []);
 
@@ -69,7 +76,7 @@ export default function LoginPage() {
           <div className={classes.input}>
             <InputComponent
               name='email'
-              placeholder='Email'
+              label='Email'
               ref={register}
               value={values.email}
               variant='outlined'
@@ -81,7 +88,7 @@ export default function LoginPage() {
               name='confirm_password'
               ref={register}
               value={values.password}
-              placeholder='Password'
+              label='Password'
               variant='outlined'
               type='password'
               onChange={(event) => inputPassword(event.target.value)}

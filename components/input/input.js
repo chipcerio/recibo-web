@@ -9,7 +9,6 @@ export default function InputComponent(props) {
     onChange,
     value,
     variant,
-    placeholder,
     type,
     id,
     name,
@@ -24,7 +23,6 @@ export default function InputComponent(props) {
         variant={variant}
         onChange={onChange}
         value={value}
-        placeholder={placeholder}
         required={required}
         type={type}
         name={name}
@@ -41,34 +39,3 @@ const useStyles = makeStyles({
     },
   },
 });
-
-// const InputStyle = withStyles((theme) => ({
-//   root: {
-//     '&': {
-//       width: '100%',
-//     },
-//   },
-//   input: {
-//     padding: 10,
-//     borderRadius: 50,
-//     border: '1px solid #ced4da',
-//     transition: theme.transitions.create(['border-color', 'box-shadow']),
-//     fontFamily: [
-//       '-apple-system',
-//       'BlinkMacSystemFont',
-//       '"Segoe UI"',
-//       'Roboto',
-//       '"Helvetica Neue"',
-//       'Arial',
-//       'sans-serif',
-//       '"Apple Color Emoji"',
-//       '"Segoe UI Emoji"',
-//       '"Segoe UI Symbol"',
-//     ].join(','),
-//     '&:focus': {
-//       //   boxShadow: `${fade(theme.palette.primary.main, 0.1)} 0 0 0 0.2rem`,
-//       boxShadow: '3px 3px #dddddd',
-//       borderColor: '#dddddd',
-//     },
-//   },
-// }))(InputBase);
