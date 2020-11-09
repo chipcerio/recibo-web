@@ -54,7 +54,7 @@ export default function ForgotPasswordPage() {
           <InputComponent
             ref={register}
             value={values.email}
-            placeholder='Email'
+            label='Email'
             variant='outlined'
             onChange={(event) => {
               inputEmail(event.target.value);

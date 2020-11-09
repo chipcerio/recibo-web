@@ -9,7 +9,6 @@ export default function InputComponent(props) {
     onChange,
     value,
     variant,
-    placeholder,
     type,
     id,
     name,
@@ -24,7 +23,6 @@ export default function InputComponent(props) {
         variant={variant}
         onChange={onChange}
         value={value}
-        placeholder={placeholder}
         required={required}
         type={type}
         name={name}
