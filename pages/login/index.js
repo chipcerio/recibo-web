@@ -4,11 +4,12 @@ import { Auth } from 'aws-amplify';
 import { useForm } from 'react-hook-form';
 import Card from '@material-ui/core/Card';
 import { makeStyles } from '@material-ui/core/styles';
+
+// Components
 import ButtonComponent from '../../components/button/button';
 import InputComponent from '../../components/input/input';
 import { EMAIL, PASSWORD } from '../../constants/field.constants';
 import SnackbarComponent from '../../components/snackbar/snackbar';
-import TextField from '@material-ui/core/TextField';
 
 export default function LoginPage() {
   const { register, handleSubmit, setValue, trigger, watch, error } = useForm({
