@@ -115,7 +115,11 @@ export default function LoginPage() {
             </Link>
           </div>
           {snackShow ? (
-            <SnackbarComponent show={snackShow} duration={3000} />
+            <SnackbarComponent
+              show={snackShow}
+              duration={3000}
+              message='Incorrect Email or Password'
+            />
           ) : null}
         </div>
       </Card>
