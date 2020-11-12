@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 // Components
 import ButtonComponent from '../../components/button/button';
 import InputComponent from '../../components/input/input';
+import ForgotPasswordAuth from '../../components/forgotpasswordauth/fpasswordcode';
 import { EMAIL } from '../../constants/field.constants';
 
 export default function ForgotPasswordPage() {
@@ -74,6 +75,11 @@ export default function ForgotPasswordPage() {
           />
         </div>
       </Card>
+      {disable ? (
+        <div className={classes.forgotPasswordAuth}>
+          <ForgotPasswordAuth user={values.email} />
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -84,6 +90,10 @@ const styles = makeStyles({
     alignItems: 'center',
     justifyContent: 'center',
     height: '100vh',
+    flexDirection: 'row',
+    ['@media (max-width: 700px)']: {
+      flexDirection: 'column',
+    },
   },
   content: {
     position: 'relative',
@@ -108,4 +118,12 @@ const styles = makeStyles({
     margin: '20px 0 20px 0',
   },
   button: { width: '70%', margin: '0 0 20px 0' },
+  forgotPasswordAuth: {
+    width: '30%',
+    height: '70%',
+    ['@media (max-width:700px)']: {
+      height: '70%',
+      width: '70%',
+    },
+  },
 });
